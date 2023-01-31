@@ -17,7 +17,7 @@ public class Calculator {
     }
 
     public int sumAllOperation(int d) {
-        return (this.sum(d) + this.multiply(d) + this.divide(d));
+        return (sum(d) + multiply(d) + divide(d) + minus(d));
     }
 
     public int multiply(int a) {
