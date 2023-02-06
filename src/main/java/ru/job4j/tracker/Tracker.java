@@ -16,9 +16,9 @@ public class Tracker {
     public Item[] findAll() {
         Item[] array = new Item[size];
         int i = 0;
-        for (int index = 0; index < items.length; index++) {
-            if (items[index] != null) {
-                array[i] = items[index];
+        for (Item index : items) {
+            if (index != null) {
+                array[i] = index;
                 i++;
             }
         }
@@ -28,9 +28,9 @@ public class Tracker {
     public Item[] findByName(String key) {
         Item[] array = new Item[items.length];
         int i = 0;
-        for (int index = 0; index < items.length; index++) {
-            if (items[index] != null && items[index].getName().equals(key)) {
-                array[i] = items[index];
+        for (Item index : items) {
+            if (index != null && index.getName().equals(key)) {
+                array[i] = index;
                 i++;
             }
         }
