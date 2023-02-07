@@ -57,7 +57,7 @@ public class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            item.setId(items[index].getId());
+            item.setId(id);
             items[index] = item;
         } else {
             System.out.println("Заявка с таким id не найдена");
