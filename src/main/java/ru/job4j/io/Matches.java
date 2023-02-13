@@ -22,7 +22,7 @@ public class Matches {
                 turn = !turn;
             }
         }
-        if (!turn) {
+        if (turn) {
             System.out.println("Выиграл второй игрок");
         } else {
             System.out.println("Выиграл первый игрок");
