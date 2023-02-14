@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-public class FindByName implements UserAction {
+public class FindByNameAction implements UserAction {
 
     @Override
     public String name() {
@@ -17,7 +17,7 @@ public class FindByName implements UserAction {
                 System.out.println(item);
             }
         } else {
-            System.out.println("Заявки с именем: " + name + " не найнеды.");
+            System.out.println("Заявки с именем: " + name + " не найдены.");
         }
 
         return true;
