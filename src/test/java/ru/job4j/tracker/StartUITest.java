@@ -71,6 +71,8 @@ class StartUITest {
         assertThat(out.toString()).isEqualTo(
                 "0. Edit item" + ln
                         + "1. Exit" + ln
+                        + "=== Edit item ===" + ln
+                        + "Заявка изменена успешно." + ln
                         + "0. Edit item" + ln
                         + "1. Exit" + ln
         );
@@ -82,7 +84,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item("test1"));
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(one.getId()), "1"}
+                new String[] {"0", "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new ShowAllAction(out),
@@ -93,6 +95,8 @@ class StartUITest {
         assertThat(out.toString()).isEqualTo(
                 "0. Show all item" + ln
                         + "1. Exit" + ln
+                        + "=== Show all items ===" + ln
+                        + one + ln
                         + "0. Show all item" + ln
                         + "1. Exit" + ln
         );
@@ -104,7 +108,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item("test1"));
         Input in = new StubInput(
-                new String[] {"0", "test1", "1"}
+                new String[] {"0", String.valueOf(one.getName()), "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new FindByNameAction(out),
@@ -115,6 +119,8 @@ class StartUITest {
         assertThat(out.toString()).isEqualTo(
                 "0. Find items by name" + ln
                         + "1. Exit" + ln
+                        + "=== Find items by name ===" + ln
+                        + one + ln
                         + "0. Find items by name" + ln
                         + "1. Exit" + ln
         );
@@ -137,6 +143,8 @@ class StartUITest {
         assertThat(out.toString()).isEqualTo(
                 "0. Find item by id" + ln
                         + "1. Exit" + ln
+                        + "=== Find item by id ===" + ln
+                        + one + ln
                         + "0. Find item by id" + ln
                         + "1. Exit" + ln
         );
