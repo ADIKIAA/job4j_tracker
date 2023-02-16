@@ -68,10 +68,12 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "0. Edit item" + ln
+                "Menu: " + ln
+                        + "0. Edit item" + ln
                         + "1. Exit" + ln
                         + "=== Edit item ===" + ln
                         + "Заявка изменена успешно." + ln
+                        + "Menu: " + ln
                         + "0. Edit item" + ln
                         + "1. Exit" + ln
         );
@@ -92,10 +94,12 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "0. Show all item" + ln
+                "Menu: " + ln
+                        + "0. Show all item" + ln
                         + "1. Exit" + ln
                         + "=== Show all items ===" + ln
                         + one + ln
+                        + "Menu: " + ln
                         + "0. Show all item" + ln
                         + "1. Exit" + ln
         );
@@ -107,7 +111,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item("test1"));
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(one.getName()), "1"}
+                new String[] {"0", one.getName(), "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new FindByNameAction(out),
@@ -116,10 +120,12 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "0. Find items by name" + ln
+                "Menu: " + ln
+                        + "0. Find items by name" + ln
                         + "1. Exit" + ln
                         + "=== Find items by name ===" + ln
                         + one + ln
+                        + "Menu: " + ln
                         + "0. Find items by name" + ln
                         + "1. Exit" + ln
         );
@@ -140,10 +146,12 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "0. Find item by id" + ln
+                "Menu: " + ln
+                        + "0. Find item by id" + ln
                         + "1. Exit" + ln
                         + "=== Find item by id ===" + ln
                         + one + ln
+                        + "Menu: " + ln
                         + "0. Find item by id" + ln
                         + "1. Exit" + ln
         );
