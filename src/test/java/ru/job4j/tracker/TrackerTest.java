@@ -7,7 +7,6 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.assertj.core.api.Assertions.assertThat;
-
 public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
