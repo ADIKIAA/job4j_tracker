@@ -36,7 +36,7 @@ public class BankService {
     /**
      * Метод позволяет удалить пользователя из системы.
      * @param passport номер и серия пасспорта
-     * @return
+     * @return true если удаление прошло успешно, иначе false
      */
     public boolean deleteUser(String passport) {
         return users.remove(new User(passport, "")) != null;
@@ -78,7 +78,7 @@ public class BankService {
      * Если не найден пользователь или его счет будет возвращен null.
      * @param passport серия и номер пасспорта
      * @param requisite реквизит счета
-     * @return
+     * @return банковский счет пользователя, иначе null
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
@@ -103,7 +103,7 @@ public class BankService {
      * @param destPassport серия и номер пасспорта пользователя которому переводят
      * @param destRequisite ревизиты счета на который переводят
      * @param amount сумма перевода
-     * @return
+     * @return true если операция прошла успешно, иначе false
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {

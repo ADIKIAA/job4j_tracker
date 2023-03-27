@@ -18,7 +18,7 @@ public class Account {
     private double balance;
 
     /**
-     * Конструктор создания
+     * Конструктор создания нового банковского счета
      * инициализирует все поля
      * @param requisite рекизит
      * @param balance баланс
@@ -64,7 +64,7 @@ public class Account {
      * Перепределенный метод equals
      * сравнивает банковские счета только по полю реквизит
      * @param o
-     * @return
+     * @return true если счета одинаковы, иначе false
      */
     @Override
     public boolean equals(Object o) {
@@ -81,7 +81,7 @@ public class Account {
     /**
      * Переопределенный метод hashCode
      * сравнивает банковские счета только по полю реквизит
-     * @return
+     * @return true если счета одинаковы, иначе false
      */
     @Override
     public int hashCode() {

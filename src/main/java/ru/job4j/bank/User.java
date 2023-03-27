@@ -54,7 +54,7 @@ public class User {
 
     /**
      * Сеттер назначает ФИО пользователя
-     * @param username
+     * @param username ФИО пользователя
      */
     public void setUsername(String username) {
         this.username = username;
@@ -63,8 +63,8 @@ public class User {
     /**
      * Переопределенный метод equals
      * сравнивает двух пользователей только по серии и номеру пасспорта
-     * @param o
-     * @return
+     * @param o пользователь
+     * @return true если пользователи одинаковы, иначе false
      */
     @Override
     public boolean equals(Object o) {
@@ -81,7 +81,7 @@ public class User {
     /**
      * Переопределенный метод hashCode
      * сравнивает двух пользователей только по серии и номеру пасспорта
-     * @return
+     * @return true если пользователи одинаковы, иначе false
      */
     @Override
     public int hashCode() {
