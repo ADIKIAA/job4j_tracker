@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 class StartUITest {
     @Test
     public void whenCreateItem() {
@@ -173,4 +177,76 @@ class StartUITest {
                         + "0. Exit" + ln
         );
     }
+
+    @Test
+    public void testDeleteActionWithMockito() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        tracker.add(new Item("Delete this item"));
+        DeleteAction del = new DeleteAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        del.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertThat(out.toString()).isEqualTo("=== Delete item ===" + ln
+                                                +  "Заявка удалена успешно." + ln);
+        assertThat(tracker.findAll()).isEmpty();
+    }
+
+    @Test
+    public void testFindByIdActionWithMockito() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        Item item = tracker.add(new Item("New item"));
+        FindByIdAction findByIdAction = new FindByIdAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        findByIdAction.execute(input, tracker);
+
+        assertThat(tracker.findAll()).containsExactly(item);
+    }
+
+    @Test
+    public void testFindByIdActionWithMockitoWhenItemNoFound() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        Item item = tracker.add(new Item("New item"));
+        FindByIdAction findByIdAction = new FindByIdAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(5);
+
+        findByIdAction.execute(input, tracker);
+
+        String ln = System.lineSeparator();
+        assertThat(tracker.findAll()).containsExactly(item);
+        assertThat(out.toString()).isEqualTo("=== Find item by id ===" + ln
+                             + "Заявка с введенным id: " + 5 + " не найдена" + ln);
+    }
+
+    @Test
+    public void testFindByNameActionWithMockito() {
+        Output out = new StubOutput();
+        MemTracker tracker = new MemTracker();
+        tracker.add(new Item("First item"));
+        tracker.add(new Item("Second item"));
+        FindByNameAction findByNameAction = new FindByNameAction(out);
+
+        Input input = mock(Input.class);
+
+        when(input.askStr(any(String.class))).thenReturn("Second item");
+
+        boolean rsl = findByNameAction.execute(input, tracker);
+
+        assertThat(rsl).isTrue();
+    }
+
 }
