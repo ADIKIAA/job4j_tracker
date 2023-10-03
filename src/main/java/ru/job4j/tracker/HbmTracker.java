@@ -44,9 +44,10 @@ public class HbmTracker implements Store, AutoCloseable {
                     .setParameter("created", item.getCreated());
             rsl = query.executeUpdate() > 0;
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return rsl;
     }
@@ -61,9 +62,10 @@ public class HbmTracker implements Store, AutoCloseable {
                     .setParameter("id", id);
             rsl = query.executeUpdate() > 0;
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return rsl;
     }
@@ -71,21 +73,39 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findAll() {
         Session session = sf.openSession();
-        return session.createQuery("from Item", Item.class).list();
+        List<Item> rsl;
+        try {
+            rsl = session.createQuery("from Item", Item.class).list();
+        } finally {
+            session.close();
+        }
+        return rsl;
     }
 
     @Override
     public List<Item> findByName(String key) {
         Session session = sf.openSession();
-        return session.createQuery("from Item WHERE name LIKE :key", Item.class)
-                .setParameter("key", "%" + key + "%").list();
+        List<Item> rsl;
+        try {
+            rsl = session.createQuery("from Item WHERE name LIKE :key", Item.class)
+                    .setParameter("key", "%" + key + "%").list();
+        } finally {
+            session.close();
+        }
+        return rsl;
     }
 
     @Override
     public Item findById(int id) {
         Session session = sf.openSession();
-        return session.createQuery("from Item WHERE id = id", Item.class)
-                .setParameter("id", id).uniqueResult();
+        Item rsl;
+        try {
+            rsl = session.createQuery("from Item WHERE id = id", Item.class)
+                    .setParameter("id", id).uniqueResult();
+        } finally {
+            session.close();
+        }
+        return rsl;
     }
 
     @Override
