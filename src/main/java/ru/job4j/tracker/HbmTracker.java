@@ -125,5 +125,4 @@ public class HbmTracker implements Store, AutoCloseable {
     public void close() throws Exception {
         StandardServiceRegistryBuilder.destroy(registry);
     }
-
 }
