@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -38,8 +37,8 @@ public class HbmTracker implements Store, AutoCloseable {
         boolean rsl = false;
         try {
             session.beginTransaction();
-            Query<Item> query = session.createQuery(
-                " UPDATE (from Item WHERE id = :id) SET name = :name, created = :created", Item.class)
+            var query = session.createQuery(
+                " UPDATE (from Item WHERE id = :id) SET name = :name, created = :created")
                     .setParameter("id", id)
                     .setParameter("name", item.getName())
                     .setParameter("created", item.getCreated());
@@ -59,7 +58,7 @@ public class HbmTracker implements Store, AutoCloseable {
         boolean rsl = false;
         try {
             session.beginTransaction();
-            Query<Item> query = session.createQuery("DELETE Item WHERE id = :id", Item.class)
+            var query = session.createQuery("DELETE from Item WHERE id = :id")
                     .setParameter("id", id);
             rsl = query.executeUpdate() > 0;
             session.getTransaction().commit();
@@ -110,7 +109,7 @@ public class HbmTracker implements Store, AutoCloseable {
         Item rsl = null;
         try {
             session.beginTransaction();
-            rsl = session.createQuery("from Item WHERE id = id", Item.class)
+            rsl = session.createQuery("from Item WHERE id = :id", Item.class)
                     .setParameter("id", id).uniqueResult();
             session.getTransaction().commit();
         } catch (Exception e) {
